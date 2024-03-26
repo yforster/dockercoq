@@ -1,4 +1,4 @@
-FROM coqorg/coq:8.19-ocaml-4.14-flambda
+FROM coqorg/coq:8.18-ocaml-4.14-flambda
 
 SHELL ["/bin/bash", "--login", "-o", "pipefail", "-c"]
 
@@ -21,7 +21,7 @@ RUN set -x \
 # build Equations
 RUN set -x \
   && eval $(opam env --switch=${COMPILER} --set-switch) \
-  && opam install -y -v -j ${NJOBS} coq-equations.1.3+8.19
+  && opam install -y -v -j ${NJOBS} coq-equations.1.3+8.18
 
 # build CompCert
 RUN set -x \
@@ -31,12 +31,12 @@ RUN set -x \
 # build ExtLib
 RUN set -x \
   && eval $(opam env --switch=${COMPILER} --set-switch) \
-  && opam install -y -v -j ${NJOBS} coq-ext-lib.0.12.1 
+  && opam install -y -v -j ${NJOBS} coq-ext-lib.0.11.8
 
 # build MetaCoq
 RUN set -x \
   && eval $(opam env --switch=${COMPILER} --set-switch) \
-  && opam install -y -v -j ${NJOBS}  coq-metacoq.1.3.1+8.19 
+  && opam install -y -v -j ${NJOBS}  coq-metacoq.1.3.1+8.18
 
 # Show installed packages
 RUN set -x \
